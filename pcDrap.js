@@ -5,6 +5,7 @@ $(function() {
     _drag.maxLeft; //距离左边最大的距离
     _drag.maxTop; //距离上边最大的距离
     _drag.dragging = false; //是否拖动标志
+    
     //拖动函数
     function bindDrag(el) {
         var winWidth = $(window).width(),

@@ -1,6 +1,19 @@
-function drag(obj){
-    var parentNode = window.self;  
-    var pWidth = parentNode.innerWidth,pHeight = parentNode.innerHeight;
+  /*
+    参数说明：
+    元素绝对定位，父级相对定位，如果父级为window，则可以不用
+    传一个参数，表示父级为window，物体相对于window范围拖动
+    传2个参数，则父级为第二个参数，物体相对于父级范围拖动
+    参数为id值
+*/
+function drag(obj,parentNode){
+    var obj = document.getElementById(obj);
+    if(arguments.length == 1){
+        var parentNode = window.self;  
+        var pWidth = parentNode.innerWidth,pHeight = parentNode.innerHeight;   
+    }else{
+        var parentNode = document.getElementById(parentNode);
+        var pWidth = parentNode.clientWidth,pHeight = parentNode.clientHeight;
+    }
     obj.addEventListener('touchstart',function(event){
         //当只有一个手指时              .
         if(event.touches.length == 1){
@@ -33,9 +46,8 @@ function drag(obj){
             };                 
         });
         obj.addEventListener('touchend',function(event){
-            obj.removeEventListener('touchmove', undefined);
-            obj.removeEventListener('touchend', undefined);
+            obj.removeEventListener('touchmove');
+            obj.removeEventListener('touchend');
         })
     });
 }
-drag(document.querySelector('#child'));
